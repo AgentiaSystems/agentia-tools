@@ -16,4 +16,5 @@ before_script:
   - gulp lint
 
 after_script:
-  - gulp coverage && codeclimate < ./coverage/lcov.info
+  - gulp coverage
+  - codeclimate < ./coverage/lcov.info
