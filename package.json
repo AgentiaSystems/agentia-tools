@@ -1,0 +1,36 @@
+{
+  "name": "agentia-utilities",
+  "version": "0.0.0",
+  "description": "Multipurpose utilities for by Agentia modules",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AgentiaSystems/agentia-utilities.git"
+  },
+  "keywords": [
+    "agentia",
+    "tools",
+    "javascript",
+    "nodejs"
+  ],
+  "author": "Johnny Estilles <johnny.estilles@agentia.asia> (http://www.agentia.asia)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AgentiaSystems/agentia-utilities/issues"
+  },
+  "homepage": "https://github.com/AgentiaSystems/agentia-utilities",
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "eslint": "^0.18.0",
+    "eslint-plugin-mocha": "^0.2.2",
+    "gulp": "^3.8.11",
+    "gulp-eslint": "^0.8.0",
+    "gulp-istanbul": "^0.8.1",
+    "gulp-mocha": "^2.0.1",
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.1"
+  }
+}
