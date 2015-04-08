@@ -179,6 +179,25 @@ describe('agentia-utilities', function() {
 
   });
 
+  describe('.exists()', function() {
+
+    it('shoud return true for non-null and non-undefined args', function() {
+      expect(utils.exists({})).to.be.true;
+      expect(utils.exists(true)).to.be.true;
+      expect(utils.exists('string')).to.be.true;
+      expect(utils.exists(function() {})).to.be.true;
+      expect(utils.exists(new Date())).to.be.true;
+      expect(utils.exists([])).to.be.true;
+      expect(utils.exists(0)).to.be.true;
+    });
+
+    it('shoud return false for null and undefined args', function() {
+      expect(utils.exists(null)).to.be.false;
+      expect(utils.exists(undefined)).to.be.false;
+    });
+
+  });
+
   describe('.randomString()', function() {
 
     it('shoud return a 20 char string, when length is not specified', function() {
