@@ -24,6 +24,7 @@ describe('agentia-utilities', function() {
       expect(utils.isArray('string')).to.be.false;
       expect(utils.isArray(function() {})).to.be.false;
       expect(utils.isArray(new Date())).to.be.false;
+      expect(utils.isArray(undefined)).to.be.false;
     });
 
     it('should throw an error when called without arg', function() {
@@ -45,6 +46,7 @@ describe('agentia-utilities', function() {
       expect(utils.isFunction('string')).to.be.false;
       expect(utils.isFunction([])).to.be.false;
       expect(utils.isFunction(new Date())).to.be.false;
+      expect(utils.isFunction(undefined)).to.be.false;
     });
 
     it('should throw an error when called without arg', function() {
@@ -66,6 +68,7 @@ describe('agentia-utilities', function() {
       expect(utils.isObject([])).to.be.false;
       expect(utils.isObject(function() {})).to.be.false;
       expect(utils.isObject(new Date())).to.be.false;
+      expect(utils.isObject(undefined)).to.be.false;
     });
 
     it('should throw an error when called without arg', function() {
@@ -87,6 +90,7 @@ describe('agentia-utilities', function() {
       expect(utils.isDate([])).to.be.false;
       expect(utils.isDate(function() {})).to.be.false;
       expect(utils.isDate({})).to.be.false;
+      expect(utils.isDate(undefined)).to.be.false;
     });
 
     it('should throw an error when called without arg', function() {
@@ -108,6 +112,7 @@ describe('agentia-utilities', function() {
       expect(utils.isString(function() {})).to.be.false;
       expect(utils.isString({})).to.be.false;
       expect(utils.isString(new Date())).to.be.false;
+      expect(utils.isString(undefined)).to.be.false;
     });
 
     it('should throw an error when called without arg', function() {
@@ -129,6 +134,7 @@ describe('agentia-utilities', function() {
       expect(utils.isNumber(function() {})).to.be.false;
       expect(utils.isNumber(new Date())).to.be.false;
       expect(utils.isNumber([])).to.be.false;
+      expect(utils.isNumber(undefined)).to.be.false;
     });
 
     it('should throw an error when called without arg', function() {
@@ -155,10 +161,33 @@ describe('agentia-utilities', function() {
       expect(utils.isBoolean(new Date())).to.be.false;
       expect(utils.isBoolean([])).to.be.false;
       expect(utils.isBoolean(0)).to.be.false;
+      expect(utils.isBoolean(undefined)).to.be.false;
     });
 
     it('should throw an error when called without arg', function() {
-      expect(utils.isNumber).to.throw;
+      expect(utils.isBoolean).to.throw;
+    });
+
+  });
+
+  describe('.isUndefined()', function() {
+
+    it('shoud return true for boolean args', function() {
+      expect(utils.isUndefined(undefined)).to.be.true;
+    });
+
+    it('shoud return false for non-boolean args', function() {
+      expect(utils.isUndefined({})).to.be.false;
+      expect(utils.isUndefined(true)).to.be.false;
+      expect(utils.isUndefined('string')).to.be.false;
+      expect(utils.isUndefined(function() {})).to.be.false;
+      expect(utils.isUndefined(new Date())).to.be.false;
+      expect(utils.isUndefined([])).to.be.false;
+      expect(utils.isUndefined(0)).to.be.false;
+    });
+
+    it('should throw an error when called without arg', function() {
+      expect(utils.isUndefined).to.throw;
     });
 
   });
