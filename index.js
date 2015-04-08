@@ -60,6 +60,29 @@ var round = function round(num, exp) {
 	return Math.floor(num * multiplier) / multiplier;
 };
 
+var defineProp = function defineProp(obj, name, getter, setter) {
+	var options = {
+		configurable: true,
+    enumerable: true
+	};
+
+	if (isFunction(getter)) {
+		options.get = getter;
+	}
+
+	if (!isFunction(getter) && exists(getter)) {
+		options.value = getter;
+	}
+
+	if (isFunction(setter)) {
+		options.set = setter;
+	}
+
+	console.log(options);
+
+  Object.defineProperty(obj, name, options);
+};
+
 module.exports = {
 	isArray: isArray,
 	isFunction: isFunction,
@@ -72,5 +95,6 @@ module.exports = {
 	isNull: isNull,
 	exists: exists,
 	randomString: randomString,
-	round: round
+	round: round,
+	defineProp: defineProp
 };
