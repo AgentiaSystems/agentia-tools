@@ -32,6 +32,10 @@ var isUndefined = function isUndefined(arg) {
 	return (typeof arg === 'undefined');
 };
 
+var isNull = function isNull(arg) {
+	return (arg === null);
+};
+
 var randomString = function randomString(length, characters) {
 
 	var string = '';
@@ -61,6 +65,7 @@ module.exports = {
 	isNumber: isNumber,
 	isBoolean: isBoolean,
 	isUndefined: isUndefined,
+	isNull: isNull,
 	randomString: randomString,
 	round: round
 };
