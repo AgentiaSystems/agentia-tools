@@ -24,6 +24,10 @@ var isNumber = function isNumber(arg) {
 	return (typeof arg === 'number');
 };
 
+var isBoolean = function isBoolean(arg) {
+	return (typeof arg === 'boolean');
+};
+
 var randomString = function randomString(length, characters) {
 
 	var string = '';
@@ -51,6 +55,7 @@ module.exports = {
 	isDate: isDate,
 	isString: isString,
 	isNumber: isNumber,
+	isBoolean: isBoolean,
 	randomString: randomString,
 	round: round
 };
