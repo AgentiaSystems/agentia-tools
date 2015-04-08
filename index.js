@@ -28,6 +28,10 @@ var isBoolean = function isBoolean(arg) {
 	return (typeof arg === 'boolean');
 };
 
+var isUndefined = function isUndefined(arg) {
+	return (typeof arg === 'undefined');
+};
+
 var randomString = function randomString(length, characters) {
 
 	var string = '';
@@ -56,6 +60,7 @@ module.exports = {
 	isString: isString,
 	isNumber: isNumber,
 	isBoolean: isBoolean,
+	isUndefined: isUndefined,
 	randomString: randomString,
 	round: round
 };
