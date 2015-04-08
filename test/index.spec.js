@@ -137,6 +137,32 @@ describe('agentia-utilities', function() {
 
   });
 
+  describe('.isBoolean()', function() {
+
+    it('shoud return true for boolean args', function() {
+      var num = 1;
+
+      expect(utils.isBoolean(true)).to.be.true;
+      expect(utils.isBoolean(false)).to.be.true;
+      expect(utils.isBoolean(num === 1)).to.be.true;
+      expect(utils.isBoolean(num === 0)).to.be.true;
+    });
+
+    it('shoud return false for non-boolean args', function() {
+      expect(utils.isBoolean({})).to.be.false;
+      expect(utils.isBoolean('string')).to.be.false;
+      expect(utils.isBoolean(function() {})).to.be.false;
+      expect(utils.isBoolean(new Date())).to.be.false;
+      expect(utils.isBoolean([])).to.be.false;
+      expect(utils.isBoolean(0)).to.be.false;
+    });
+
+    it('should throw an error when called without arg', function() {
+      expect(utils.isNumber).to.throw;
+    });
+
+  });
+
   describe('.randomString()', function() {
 
     it('shoud return a 20 char string, when length is not specified', function() {
