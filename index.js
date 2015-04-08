@@ -36,6 +36,10 @@ var isNull = function isNull(arg) {
 	return (arg === null);
 };
 
+var exists = function exists(arg) {
+	return !isUndefined(arg) && !isNull(arg);
+};
+
 var randomString = function randomString(length, characters) {
 
 	var string = '';
@@ -66,6 +70,7 @@ module.exports = {
 	isBoolean: isBoolean,
 	isUndefined: isUndefined,
 	isNull: isNull,
+	exists: exists,
 	randomString: randomString,
 	round: round
 };
