@@ -24,10 +24,7 @@ describe('agentia-utilities', function() {
       expect(utils.isArray('string')).to.be.false;
       expect(utils.isArray(function() {})).to.be.false;
       expect(utils.isArray(new Date())).to.be.false;
-    });
-
-    it('should throw an error when called without arg', function() {
-      expect(utils.isArray).to.throw;
+      expect(utils.isArray(undefined)).to.be.false;
     });
 
   });
@@ -45,10 +42,7 @@ describe('agentia-utilities', function() {
       expect(utils.isFunction('string')).to.be.false;
       expect(utils.isFunction([])).to.be.false;
       expect(utils.isFunction(new Date())).to.be.false;
-    });
-
-    it('should throw an error when called without arg', function() {
-      expect(utils.isFunction).to.throw;
+      expect(utils.isFunction(undefined)).to.be.false;
     });
 
   });
@@ -66,10 +60,7 @@ describe('agentia-utilities', function() {
       expect(utils.isObject([])).to.be.false;
       expect(utils.isObject(function() {})).to.be.false;
       expect(utils.isObject(new Date())).to.be.false;
-    });
-
-    it('should throw an error when called without arg', function() {
-      expect(utils.isObject).to.throw;
+      expect(utils.isObject(undefined)).to.be.false;
     });
 
   });
@@ -87,10 +78,7 @@ describe('agentia-utilities', function() {
       expect(utils.isDate([])).to.be.false;
       expect(utils.isDate(function() {})).to.be.false;
       expect(utils.isDate({})).to.be.false;
-    });
-
-    it('should throw an error when called without arg', function() {
-      expect(utils.isDate).to.throw;
+      expect(utils.isDate(undefined)).to.be.false;
     });
 
   });
@@ -108,10 +96,7 @@ describe('agentia-utilities', function() {
       expect(utils.isString(function() {})).to.be.false;
       expect(utils.isString({})).to.be.false;
       expect(utils.isString(new Date())).to.be.false;
-    });
-
-    it('should throw an error when called without arg', function() {
-      expect(utils.isString).to.throw;
+      expect(utils.isString(undefined)).to.be.false;
     });
 
   });
@@ -129,10 +114,86 @@ describe('agentia-utilities', function() {
       expect(utils.isNumber(function() {})).to.be.false;
       expect(utils.isNumber(new Date())).to.be.false;
       expect(utils.isNumber([])).to.be.false;
+      expect(utils.isNumber(undefined)).to.be.false;
     });
 
-    it('should throw an error when called without arg', function() {
-      expect(utils.isNumber).to.throw;
+  });
+
+  describe('.isBoolean()', function() {
+
+    it('shoud return true for boolean args', function() {
+      var num = 1;
+
+      expect(utils.isBoolean(true)).to.be.true;
+      expect(utils.isBoolean(false)).to.be.true;
+      expect(utils.isBoolean(num === 1)).to.be.true;
+      expect(utils.isBoolean(num === 0)).to.be.true;
+    });
+
+    it('shoud return false for non-boolean args', function() {
+      expect(utils.isBoolean({})).to.be.false;
+      expect(utils.isBoolean('string')).to.be.false;
+      expect(utils.isBoolean(function() {})).to.be.false;
+      expect(utils.isBoolean(new Date())).to.be.false;
+      expect(utils.isBoolean([])).to.be.false;
+      expect(utils.isBoolean(0)).to.be.false;
+      expect(utils.isBoolean(undefined)).to.be.false;
+    });
+
+  });
+
+  describe('.isUndefined()', function() {
+
+    it('shoud return true for boolean args', function() {
+      expect(utils.isUndefined(undefined)).to.be.true;
+    });
+
+    it('shoud return false for non-boolean args', function() {
+      expect(utils.isUndefined({})).to.be.false;
+      expect(utils.isUndefined(true)).to.be.false;
+      expect(utils.isUndefined('string')).to.be.false;
+      expect(utils.isUndefined(function() {})).to.be.false;
+      expect(utils.isUndefined(new Date())).to.be.false;
+      expect(utils.isUndefined([])).to.be.false;
+      expect(utils.isUndefined(0)).to.be.false;
+    });
+
+  });
+
+  describe('.isNull()', function() {
+
+    it('shoud return true for null args', function() {
+      expect(utils.isNull(null)).to.be.true;
+    });
+
+    it('shoud return false for non-boolean args', function() {
+      expect(utils.isNull({})).to.be.false;
+      expect(utils.isNull(true)).to.be.false;
+      expect(utils.isNull('string')).to.be.false;
+      expect(utils.isNull(function() {})).to.be.false;
+      expect(utils.isNull(new Date())).to.be.false;
+      expect(utils.isNull([])).to.be.false;
+      expect(utils.isNull(0)).to.be.false;
+      expect(utils.isNull(undefined)).to.be.false;
+    });
+
+  });
+
+  describe('.exists()', function() {
+
+    it('shoud return true for non-null and non-undefined args', function() {
+      expect(utils.exists({})).to.be.true;
+      expect(utils.exists(true)).to.be.true;
+      expect(utils.exists('string')).to.be.true;
+      expect(utils.exists(function() {})).to.be.true;
+      expect(utils.exists(new Date())).to.be.true;
+      expect(utils.exists([])).to.be.true;
+      expect(utils.exists(0)).to.be.true;
+    });
+
+    it('shoud return false for null and undefined args', function() {
+      expect(utils.exists(null)).to.be.false;
+      expect(utils.exists(undefined)).to.be.false;
     });
 
   });
@@ -177,6 +238,60 @@ describe('agentia-utilities', function() {
       expect(utils.round(1111.11111, -1)).to.equal(1110);
       expect(utils.round(1111.11111, -2)).to.equal(1100);
       expect(utils.round(1111.11111, -3)).to.equal(1000);
+    });
+
+  });
+
+  describe('.defineProp()', function() {
+    var obj;
+
+    beforeEach(function() {
+      obj = {};
+    });
+
+    afterEach(function() {
+      obj = null;
+    });
+
+    it('should create read/write property, when getter/setter specified', function() {
+      var getter = function() {
+        return this._data;
+      };
+      var setter = function(data) {
+        this._data = data;
+      };
+
+      utils.defineProp(obj, 'key', getter, setter);
+
+      expect(obj).to.have.property('key');
+      obj.key = 'value';
+      expect(obj.key).to.equal('value');
+    });
+
+    it('should create read-only property, when only getter specified', function() {
+      obj._data = 0;
+      var getter = function() {
+        return this._data++;
+      };
+
+      utils.defineProp(obj, 'key', getter);
+
+      expect(obj).to.have.property('key');
+      expect(obj.key).to.equal(1);
+      expect(obj.key).to.equal(2);
+      expect(function() {
+        obj.key = 3;
+      }).to.throw;
+    });
+
+    it('should create read-only property, when ony value is passed', function() {
+      utils.defineProp(obj, 'key', 'value');
+
+      expect(obj).to.have.property('key');
+      expect(obj.key).to.equal('value');
+      expect(function() {
+        obj.key = 'another value';
+      }).to.throw;
     });
 
   });

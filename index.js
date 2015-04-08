@@ -24,6 +24,22 @@ var isNumber = function isNumber(arg) {
 	return (typeof arg === 'number');
 };
 
+var isBoolean = function isBoolean(arg) {
+	return (typeof arg === 'boolean');
+};
+
+var isUndefined = function isUndefined(arg) {
+	return (typeof arg === 'undefined');
+};
+
+var isNull = function isNull(arg) {
+	return (arg === null);
+};
+
+var exists = function exists(arg) {
+	return !isUndefined(arg) && !isNull(arg);
+};
+
 var randomString = function randomString(length, characters) {
 
 	var string = '';
@@ -44,6 +60,29 @@ var round = function round(num, exp) {
 	return Math.floor(num * multiplier) / multiplier;
 };
 
+var defineProp = function defineProp(obj, name, getter, setter) {
+	var options = {
+		configurable: true,
+    enumerable: true
+	};
+
+	if (isFunction(getter)) {
+		options.get = getter;
+	}
+
+	if (!isFunction(getter) && exists(getter)) {
+		options.value = getter;
+	}
+
+	if (isFunction(setter)) {
+		options.set = setter;
+	}
+
+	console.log(options);
+
+  Object.defineProperty(obj, name, options);
+};
+
 module.exports = {
 	isArray: isArray,
 	isFunction: isFunction,
@@ -51,6 +90,11 @@ module.exports = {
 	isDate: isDate,
 	isString: isString,
 	isNumber: isNumber,
+	isBoolean: isBoolean,
+	isUndefined: isUndefined,
+	isNull: isNull,
+	exists: exists,
 	randomString: randomString,
-	round: round
+	round: round,
+	defineProp: defineProp
 };
