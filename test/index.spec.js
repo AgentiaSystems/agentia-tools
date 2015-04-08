@@ -242,4 +242,58 @@ describe('agentia-utilities', function() {
 
   });
 
+  describe('.defineProp()', function() {
+    var obj;
+
+    beforeEach(function() {
+      obj = {};
+    });
+
+    afterEach(function() {
+      obj = null;
+    });
+
+    it('should create read/write property, when getter/setter specified', function() {
+      var getter = function() {
+        return this._data;
+      };
+      var setter = function(data) {
+        this._data = data;
+      };
+
+      utils.defineProp(obj, 'key', getter, setter);
+
+      expect(obj).to.have.property('key');
+      obj.key = 'value';
+      expect(obj.key).to.equal('value');
+    });
+
+    it('should create read-only property, when only getter specified', function() {
+      obj._data = 0;
+      var getter = function() {
+        return this._data++;
+      };
+
+      utils.defineProp(obj, 'key', getter);
+
+      expect(obj).to.have.property('key');
+      expect(obj.key).to.equal(1);
+      expect(obj.key).to.equal(2);
+      expect(function() {
+        obj.key = 3;
+      }).to.throw;
+    });
+
+    it('should create read-only property, when ony value is passed', function() {
+      utils.defineProp(obj, 'key', 'value');
+
+      expect(obj).to.have.property('key');
+      expect(obj.key).to.equal('value');
+      expect(function() {
+        obj.key = 'another value';
+      }).to.throw;
+    });
+
+  });
+
 });
