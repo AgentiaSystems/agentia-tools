@@ -78,9 +78,17 @@ var defineProp = function defineProp(obj, name, getter, setter) {
 		options.set = setter;
 	}
 
-	console.log(options);
-
   Object.defineProperty(obj, name, options);
+};
+
+var getParamNames = function getParamNames(fn) {
+	var params;
+
+	if (isFunction(fn)) {
+		fn = fn.toString();
+		params = fn.slice(fn.indexOf('(') + 1, fn.indexOf(')')).match(/([^\s,]+)/g);
+	}
+  return isArray(params) ? params : [];
 };
 
 module.exports = {
@@ -96,5 +104,6 @@ module.exports = {
 	exists: exists,
 	randomString: randomString,
 	round: round,
-	defineProp: defineProp
+	defineProp: defineProp,
+	getParamNames: getParamNames
 };
