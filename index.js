@@ -78,8 +78,6 @@ var defineProp = function defineProp(obj, name, getter, setter) {
 		options.set = setter;
 	}
 
-	console.log(options);
-
   Object.defineProperty(obj, name, options);
 };
 
