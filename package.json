@@ -4,7 +4,7 @@
   "description": "Multipurpose utilities for by Agentia modules",
   "main": "index.js",
   "scripts": {
-    "test": "gulp spec"
+    "test": "gulp lint && gulp spec"
   },
   "repository": {
     "type": "git",
