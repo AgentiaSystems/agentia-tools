@@ -1,10 +1,10 @@
 {
   "name": "agentia-utilities",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Multipurpose utilities for by Agentia modules",
   "main": "index.js",
   "scripts": {
-    "test": "gulp spec"
+    "test": "gulp lint && gulp spec"
   },
   "repository": {
     "type": "git",

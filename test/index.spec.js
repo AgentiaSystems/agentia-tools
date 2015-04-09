@@ -296,4 +296,40 @@ describe('agentia-utilities', function() {
 
   });
 
+  describe('.getParamNames()', function() {
+
+    it('should return an array of params', function() {
+      var fn = function(a, b, c) {
+        return a + b + c;
+      };
+      var params = utils.getParamNames(fn);
+
+      expect(params).to.be.an('array');
+      expect(params).to.have.length.of(3);
+      expect(params).to.include('a');
+      expect(params).to.include('b');
+      expect(params).to.include('c');
+    });
+
+    it('should return an empty array, when function has no params', function() {
+      var fn = function() {};
+      var params = utils.getParamNames(fn);
+
+      expect(params).to.be.an('array');
+      expect(params).to.be.empty;
+    });
+
+
+    it('should return an empty array, when argument is not a function', function() {
+      expect(utils.getParamNames({})).to.be.empty;
+      expect(utils.getParamNames(true)).to.be.empty;
+      expect(utils.getParamNames('string')).to.be.empty;
+      expect(utils.getParamNames(new Date())).to.be.empty;
+      expect(utils.getParamNames([])).to.be.empty;
+      expect(utils.getParamNames(0)).to.be.empty;
+      expect(utils.getParamNames(null)).to.be.empty;
+      expect(utils.getParamNames(undefined)).to.be.empty;
+    });
+
+  });
 });
