@@ -11,35 +11,35 @@ var isArray = function isArray(arg) {
 };
 
 var isFunction = function isFunction(arg) {
-  return (typeof arg === 'function');
+  return (typeOf(arg) === 'function');
 };
 
 var isObject = function isObject(arg) {
-  return (Object.prototype.toString.call(arg) === '[object Object]');
+  return (typeOf(arg) === 'object');
 };
 
 var isDate = function isDate(arg) {
-  return (Object.prototype.toString.call(arg) === '[object Date]');
+  return (typeOf(arg) === 'date');
 };
 
 var isString = function isString(arg) {
-  return (typeof arg === 'string');
+  return (typeOf(arg) === 'string');
 };
 
 var isNumber = function isNumber(arg) {
-  return (typeof arg === 'number');
+  return (typeOf(arg) === 'number');
 };
 
 var isBoolean = function isBoolean(arg) {
-  return (typeof arg === 'boolean');
+  return (typeOf(arg) === 'boolean');
 };
 
 var isUndefined = function isUndefined(arg) {
-  return (typeof arg === 'undefined');
+  return (typeOf(arg) === 'undefined');
 };
 
 var isNull = function isNull(arg) {
-  return (arg === null);
+  return (typeOf(arg) === 'null');
 };
 
 var exists = function exists(arg) {
