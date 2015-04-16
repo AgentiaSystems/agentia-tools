@@ -7,6 +7,50 @@ var utils = require('../');
 
 describe('agentia-utilities', function() {
 
+  describe('.typeOf()', function() {
+
+    it('should recognize arrays', function() {
+      expect(utils.typeOf([])).to.equal('array');
+      expect(utils.typeOf(new Array())).to.equal('array');
+    });
+
+    it('should recognize functions', function() {
+      expect(utils.typeOf(function() {})).to.equal('function');
+    });
+
+    it('should recognize objects', function() {
+      expect(utils.typeOf({})).to.equal('object');
+    });
+
+    it('should recognize dates', function() {
+      expect(utils.typeOf(new Date())).to.equal('date');
+    });
+
+    it('should recognize strings', function() {
+      expect(utils.typeOf(String(''))).to.equal('string');
+      expect(utils.typeOf('')).to.equal('string');
+    });
+
+    it('should recognize numbers', function() {
+      expect(utils.typeOf(Number(0))).to.equal('number');
+      expect(utils.typeOf(0)).to.equal('number');
+    });
+
+    it('should recognize booleans', function() {
+      expect(utils.typeOf(true)).to.equal('boolean');
+      expect(utils.typeOf(false)).to.equal('boolean');
+    });
+
+    it('should recognize undefined', function() {
+      expect(utils.typeOf(undefined)).to.equal('undefined');
+    });
+
+    it('should recognize nulls', function() {
+      expect(utils.typeOf(null)).to.equal('null');
+    });
+
+  });
+
   describe('.isArray()', function() {
 
     it('shoud return true for array-literal args', function() {
