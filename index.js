@@ -1,5 +1,11 @@
 'use strict';
 
+var typeOf = function typeOf(value) {
+  return Object.prototype.toString.call(value)
+    .replace(/^\[.+\s(.+?)\]$/, '$1')
+    .toLowerCase();
+};
+
 var isArray = function isArray(arg) {
   return Array.isArray(arg);
 };
@@ -92,6 +98,7 @@ var getParamNames = function getParamNames(fn) {
 };
 
 module.exports = {
+  typeOf: typeOf,
   isArray: isArray,
   isFunction: isFunction,
   isObject: isObject,
