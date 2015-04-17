@@ -97,6 +97,24 @@ var getParamNames = function getParamNames(fn) {
   return isArray(params) ? params : [];
 };
 
+var mergeOptions = function mergeOptions(defaults, options) {
+  if (!isObject(defaults)) {
+    defaults = {};
+  }
+
+  if (!isObject(options)) {
+    options = {};
+  }
+
+  Object.keys(defaults).forEach(function(key) {
+    if (!options.hasOwnProperty(key)) {
+      options[key] = defaults[key];
+    }
+  });
+
+  return options;
+};
+
 module.exports = {
   typeOf: typeOf,
   isArray: isArray,
@@ -112,5 +130,6 @@ module.exports = {
   randomString: randomString,
   round: round,
   defineProp: defineProp,
-  getParamNames: getParamNames
+  getParamNames: getParamNames,
+  mergeOptions: mergeOptions
 };

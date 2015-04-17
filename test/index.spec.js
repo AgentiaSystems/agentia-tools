@@ -376,4 +376,52 @@ describe('agentia-utilities', function() {
     });
 
   });
+
+  describe('.mergeOptions()', function() {
+
+    it('should return merged options', function() {
+      var defaults = { key1: 'value1' };
+      var options = { key2: 'value2' };
+
+      var merged = utils.mergeOptions(defaults, options);
+      expect(merged).to.have.property('key1');
+      expect(merged.key1).to.equal(defaults.key1);
+      expect(merged).to.have.property('key2');
+      expect(merged.key2).to.equal(options.key2);
+    });
+
+    it('should not override existing options', function() {
+      var defaults = { key1: 'value1' };
+      var options = { key1: 'value2' };
+
+      var merged = utils.mergeOptions(defaults, options);
+      expect(merged.key1).to.equal(options.key1);
+    });
+
+    it('should return options, when defaults is empty', function() {
+      var options = { key1: 'value2' };
+      var defaults = null;
+
+      var merged = utils.mergeOptions(defaults, options);
+      expect(merged).to.deep.equal(options);
+    });
+
+    it('should return defaults, when options is empty', function() {
+      var options = null;
+      var defaults = { key1: 'value2' };
+
+      var merged = utils.mergeOptions(defaults, options);
+      expect(merged).to.deep.equal(defaults);
+    });
+
+    it('should return empty object, when options and defaults are empty', function() {
+      var options = null;
+      var defaults = null;
+
+      var merged = utils.mergeOptions(defaults, options);
+      expect(merged).to.deep.equal({});
+    });
+
+  });
+
 });
