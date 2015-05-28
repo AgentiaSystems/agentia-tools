@@ -11,7 +11,9 @@ describe('agentia-utilities', function() {
 
     it('should recognize arrays', function() {
       expect(utils.typeOf([])).to.equal('array');
+      /*eslint-disable*/
       expect(utils.typeOf(new Array())).to.equal('array');
+      /*eslint-enable*/
     });
 
     it('should recognize functions', function() {
@@ -58,7 +60,9 @@ describe('agentia-utilities', function() {
     });
 
     it('shoud return true for array-object args', function() {
+      /*eslint-disable*/
       expect(utils.isArray(new Array())).to.be.true;
+      /*eslint-enable*/
     });
 
     it('shoud return false for non-array args', function() {
@@ -244,7 +248,7 @@ describe('agentia-utilities', function() {
 
   describe('.randomString()', function() {
 
-    it('shoud return a 20 char string, when length is not specified', function() {
+    it('shoud return a 20 char string, when length not specified', function() {
       expect(utils.randomString().length).to.equal(20);
     });
 
@@ -268,11 +272,11 @@ describe('agentia-utilities', function() {
 
   describe('.round()', function() {
 
-    it('shoud round to nearest integer, when decimals not specified', function () {
+    it('shoud round to nearest int, when decimals not specified', function () {
       expect(utils.round(1111.11111)).to.equal(1111);
     });
 
-    it('shoud round to the number of decimals, when decimals is positive', function () {
+    it('shoud round to number of decimals, when positive', function () {
       expect(utils.round(1111.11111, 1)).to.equal(1111.1);
       expect(utils.round(1111.11111, 2)).to.equal(1111.11);
       expect(utils.round(1111.11111, 3)).to.equal(1111.111);
@@ -297,7 +301,7 @@ describe('agentia-utilities', function() {
       obj = null;
     });
 
-    it('should create read/write property, when getter/setter specified', function() {
+    it('should create read/write prop, if getter/setter specified', function() {
       var getter = function() {
         return this._data;
       };
@@ -312,7 +316,7 @@ describe('agentia-utilities', function() {
       expect(obj.key).to.equal('value');
     });
 
-    it('should create read-only property, when only getter specified', function() {
+    it('should create read-only prop, when only getter specified', function() {
       obj._data = 0;
       var getter = function() {
         return this._data++;
@@ -328,7 +332,7 @@ describe('agentia-utilities', function() {
       }).to.throw;
     });
 
-    it('should create read-only property, when ony value is passed', function() {
+    it('should create read-only prop, when ony value is passed', function() {
       utils.defineProp(obj, 'key', 'value');
 
       expect(obj).to.have.property('key');
@@ -364,7 +368,7 @@ describe('agentia-utilities', function() {
     });
 
 
-    it('should return an empty array, when argument is not a function', function() {
+    it('should return an empty array, when arg not function', function() {
       expect(utils.getParamNames({})).to.be.empty;
       expect(utils.getParamNames(true)).to.be.empty;
       expect(utils.getParamNames('string')).to.be.empty;
@@ -414,7 +418,7 @@ describe('agentia-utilities', function() {
       expect(merged).to.deep.equal(defaults);
     });
 
-    it('should return empty object, when options and defaults are empty', function() {
+    it('should return empty obj, when options/defaults are empty', function() {
       var options = null;
       var defaults = null;
 

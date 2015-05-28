@@ -51,7 +51,8 @@ var randomString = function randomString(length, characters) {
   var string = '';
 
   length = !length ? 20 : length;
-  characters = characters || '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+  characters = characters ||
+    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
   for (var i = 0; i < length; i++) {
     string += characters.charAt(Math.floor(Math.random() * characters.length));
