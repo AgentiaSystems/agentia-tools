@@ -4,7 +4,9 @@
   "description": "Multipurpose utilities for by Agentia modules",
   "main": "index.js",
   "scripts": {
-    "test": "gulp lint && gulp spec"
+    "test": "node_modules/mocha/bin/mocha",
+    "cover": "istanbul cover node_modules/.bin/_mocha -- --reporter dot",
+    "lint": "eslint index.js test"
   },
   "repository": {
     "type": "git",
