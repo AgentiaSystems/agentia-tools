@@ -1,53 +1,52 @@
 'use strict';
 
-var typeOf = function typeOf(value) {
+function typeOf(value) {
   return Object.prototype.toString.call(value)
     .replace(/^\[.+\s(.+?)\]$/, '$1')
     .toLowerCase();
-};
+}
 
-var isArray = function isArray(arg) {
+function isArray(arg) {
   return Array.isArray(arg);
-};
+}
 
-var isFunction = function isFunction(arg) {
+function isFunction(arg) {
   return (typeOf(arg) === 'function');
-};
+}
 
-var isObject = function isObject(arg) {
+function isObject(arg) {
   return (typeOf(arg) === 'object');
-};
+}
 
-var isDate = function isDate(arg) {
+function isDate(arg) {
   return (typeOf(arg) === 'date');
-};
+}
 
-var isString = function isString(arg) {
+function isString(arg) {
   return (typeOf(arg) === 'string');
-};
+}
 
-var isNumber = function isNumber(arg) {
+function isNumber(arg) {
   return (typeOf(arg) === 'number');
-};
+}
 
-var isBoolean = function isBoolean(arg) {
+function isBoolean(arg) {
   return (typeOf(arg) === 'boolean');
-};
+}
 
-var isUndefined = function isUndefined(arg) {
+function isUndefined(arg) {
   return (typeOf(arg) === 'undefined');
-};
+}
 
-var isNull = function isNull(arg) {
+function isNull(arg) {
   return (typeOf(arg) === 'null');
-};
+}
 
-var exists = function exists(arg) {
+function exists(arg) {
   return !isUndefined(arg) && !isNull(arg);
-};
+}
 
-var randomString = function randomString(length, characters) {
-
+function randomString(length, characters) {
   var string = '';
 
   length = !length ? 20 : length;
@@ -58,16 +57,15 @@ var randomString = function randomString(length, characters) {
     string += characters.charAt(Math.floor(Math.random() * characters.length));
   }
   return string;
+}
 
-};
-
-var round = function round(num, exp) {
+function round(num, exp) {
   exp = !exp ? 0 : exp;
   var multiplier = Math.pow(10, exp);
   return Math.floor(num * multiplier) / multiplier;
-};
+}
 
-var defineProp = function defineProp(obj, name, getter, setter) {
+function defineProp(obj, name, getter, setter) {
   var options = {
     configurable: true,
     enumerable: true
@@ -86,9 +84,9 @@ var defineProp = function defineProp(obj, name, getter, setter) {
   }
 
   Object.defineProperty(obj, name, options);
-};
+}
 
-var getParamNames = function getParamNames(fn) {
+function getParamNames(fn) {
   var params;
 
   if (isFunction(fn)) {
@@ -96,9 +94,9 @@ var getParamNames = function getParamNames(fn) {
     params = fn.slice(fn.indexOf('(') + 1, fn.indexOf(')')).match(/([^\s,]+)/g);
   }
   return isArray(params) ? params : [];
-};
+}
 
-var mergeOptions = function mergeOptions(defaults, options) {
+function mergeOptions(defaults, options) {
   if (!isObject(defaults)) {
     defaults = {};
   }
@@ -114,7 +112,7 @@ var mergeOptions = function mergeOptions(defaults, options) {
   });
 
   return options;
-};
+}
 
 module.exports = {
   typeOf: typeOf,
