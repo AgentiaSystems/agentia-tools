@@ -73,6 +73,7 @@ describe('agentia-utilities', function() {
       expect(utils.isArray(function() {})).to.be.false;
       expect(utils.isArray(new Date())).to.be.false;
       expect(utils.isArray(undefined)).to.be.false;
+      expect(utils.isArray(/test/)).to.be.false;
     });
 
   });
@@ -91,6 +92,7 @@ describe('agentia-utilities', function() {
       expect(utils.isFunction([])).to.be.false;
       expect(utils.isFunction(new Date())).to.be.false;
       expect(utils.isFunction(undefined)).to.be.false;
+      expect(utils.isFunction(/test/)).to.be.false;
     });
 
   });
@@ -109,6 +111,7 @@ describe('agentia-utilities', function() {
       expect(utils.isObject(function() {})).to.be.false;
       expect(utils.isObject(new Date())).to.be.false;
       expect(utils.isObject(undefined)).to.be.false;
+      expect(utils.isObject(/test/)).to.be.false;
     });
 
   });
@@ -127,6 +130,7 @@ describe('agentia-utilities', function() {
       expect(utils.isDate(function() {})).to.be.false;
       expect(utils.isDate({})).to.be.false;
       expect(utils.isDate(undefined)).to.be.false;
+      expect(utils.isDate(/test/)).to.be.false;
     });
 
   });
@@ -145,6 +149,7 @@ describe('agentia-utilities', function() {
       expect(utils.isString({})).to.be.false;
       expect(utils.isString(new Date())).to.be.false;
       expect(utils.isString(undefined)).to.be.false;
+      expect(utils.isString(/test/)).to.be.false;
     });
 
   });
@@ -163,6 +168,7 @@ describe('agentia-utilities', function() {
       expect(utils.isNumber(new Date())).to.be.false;
       expect(utils.isNumber([])).to.be.false;
       expect(utils.isNumber(undefined)).to.be.false;
+      expect(utils.isNumber(/test/)).to.be.false;
     });
 
   });
@@ -186,17 +192,18 @@ describe('agentia-utilities', function() {
       expect(utils.isBoolean([])).to.be.false;
       expect(utils.isBoolean(0)).to.be.false;
       expect(utils.isBoolean(undefined)).to.be.false;
+      expect(utils.isBoolean(/test/)).to.be.false;
     });
 
   });
 
   describe('.isUndefined()', function() {
 
-    it('shoud return true for boolean args', function() {
+    it('shoud return true for undefined args', function() {
       expect(utils.isUndefined(undefined)).to.be.true;
     });
 
-    it('shoud return false for non-boolean args', function() {
+    it('shoud return false for defined args', function() {
       expect(utils.isUndefined({})).to.be.false;
       expect(utils.isUndefined(true)).to.be.false;
       expect(utils.isUndefined('string')).to.be.false;
@@ -204,6 +211,7 @@ describe('agentia-utilities', function() {
       expect(utils.isUndefined(new Date())).to.be.false;
       expect(utils.isUndefined([])).to.be.false;
       expect(utils.isUndefined(0)).to.be.false;
+      expect(utils.isUndefined(/test/)).to.be.false;
     });
 
   });
@@ -214,7 +222,7 @@ describe('agentia-utilities', function() {
       expect(utils.isNull(null)).to.be.true;
     });
 
-    it('shoud return false for non-boolean args', function() {
+    it('shoud return false for non-null args', function() {
       expect(utils.isNull({})).to.be.false;
       expect(utils.isNull(true)).to.be.false;
       expect(utils.isNull('string')).to.be.false;
@@ -223,6 +231,31 @@ describe('agentia-utilities', function() {
       expect(utils.isNull([])).to.be.false;
       expect(utils.isNull(0)).to.be.false;
       expect(utils.isNull(undefined)).to.be.false;
+      expect(utils.isNull(/test/)).to.be.false;
+    });
+
+  });
+
+  describe('.isRegExp()', function() {
+
+    it('should have alias .isRegex()', function() {
+      expect(utils.isRegExp).to.deep.equal(utils.isRegex);
+    });
+
+    it('shoud return true for RegExp args', function() {
+      expect(utils.isRegExp(/test/)).to.be.true;
+    });
+
+    it('shoud return false for non-RegExp args', function() {
+      expect(utils.isRegExp(null)).to.be.false;
+      expect(utils.isRegExp({})).to.be.false;
+      expect(utils.isRegExp(true)).to.be.false;
+      expect(utils.isRegExp('string')).to.be.false;
+      expect(utils.isRegExp(function() {})).to.be.false;
+      expect(utils.isRegExp(new Date())).to.be.false;
+      expect(utils.isRegExp([])).to.be.false;
+      expect(utils.isRegExp(0)).to.be.false;
+      expect(utils.isRegExp(undefined)).to.be.false;
     });
 
   });
@@ -237,6 +270,7 @@ describe('agentia-utilities', function() {
       expect(utils.exists(new Date())).to.be.true;
       expect(utils.exists([])).to.be.true;
       expect(utils.exists(0)).to.be.true;
+      expect(utils.exists(/test/)).to.be.true;
     });
 
     it('shoud return false for null and undefined args', function() {
