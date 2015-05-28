@@ -25,10 +25,13 @@ You can run our unit tests by cloning our repository, install the module depende
     npm install
     npm test
 
-You can also use our `gulp` tasks: `test` and `coverage`.
+You can check the project for lint and test coverage.
 
-    gulp test
-    gulp coverage (which generates a coverage report)
+    npm install -g istanbul
+    npm run lint
+    npm run cover
+
+> Coverage report will be located in the `./coverage` folder
 
 ## License
 **agentia-utilities** is free and open source under the MIT License.
