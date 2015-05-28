@@ -11,7 +11,9 @@ describe('agentia-utilities', function() {
 
     it('should recognize arrays', function() {
       expect(utils.typeOf([])).to.equal('array');
+      /*eslint-disable*/
       expect(utils.typeOf(new Array())).to.equal('array');
+      /*eslint-enable*/
     });
 
     it('should recognize functions', function() {
@@ -58,7 +60,9 @@ describe('agentia-utilities', function() {
     });
 
     it('shoud return true for array-object args', function() {
+      /*eslint-disable*/
       expect(utils.isArray(new Array())).to.be.true;
+      /*eslint-enable*/
     });
 
     it('shoud return false for non-array args', function() {
@@ -69,6 +73,7 @@ describe('agentia-utilities', function() {
       expect(utils.isArray(function() {})).to.be.false;
       expect(utils.isArray(new Date())).to.be.false;
       expect(utils.isArray(undefined)).to.be.false;
+      expect(utils.isArray(/test/)).to.be.false;
     });
 
   });
@@ -87,6 +92,7 @@ describe('agentia-utilities', function() {
       expect(utils.isFunction([])).to.be.false;
       expect(utils.isFunction(new Date())).to.be.false;
       expect(utils.isFunction(undefined)).to.be.false;
+      expect(utils.isFunction(/test/)).to.be.false;
     });
 
   });
@@ -105,6 +111,7 @@ describe('agentia-utilities', function() {
       expect(utils.isObject(function() {})).to.be.false;
       expect(utils.isObject(new Date())).to.be.false;
       expect(utils.isObject(undefined)).to.be.false;
+      expect(utils.isObject(/test/)).to.be.false;
     });
 
   });
@@ -123,6 +130,7 @@ describe('agentia-utilities', function() {
       expect(utils.isDate(function() {})).to.be.false;
       expect(utils.isDate({})).to.be.false;
       expect(utils.isDate(undefined)).to.be.false;
+      expect(utils.isDate(/test/)).to.be.false;
     });
 
   });
@@ -141,6 +149,7 @@ describe('agentia-utilities', function() {
       expect(utils.isString({})).to.be.false;
       expect(utils.isString(new Date())).to.be.false;
       expect(utils.isString(undefined)).to.be.false;
+      expect(utils.isString(/test/)).to.be.false;
     });
 
   });
@@ -159,6 +168,7 @@ describe('agentia-utilities', function() {
       expect(utils.isNumber(new Date())).to.be.false;
       expect(utils.isNumber([])).to.be.false;
       expect(utils.isNumber(undefined)).to.be.false;
+      expect(utils.isNumber(/test/)).to.be.false;
     });
 
   });
@@ -182,17 +192,18 @@ describe('agentia-utilities', function() {
       expect(utils.isBoolean([])).to.be.false;
       expect(utils.isBoolean(0)).to.be.false;
       expect(utils.isBoolean(undefined)).to.be.false;
+      expect(utils.isBoolean(/test/)).to.be.false;
     });
 
   });
 
   describe('.isUndefined()', function() {
 
-    it('shoud return true for boolean args', function() {
+    it('shoud return true for undefined args', function() {
       expect(utils.isUndefined(undefined)).to.be.true;
     });
 
-    it('shoud return false for non-boolean args', function() {
+    it('shoud return false for defined args', function() {
       expect(utils.isUndefined({})).to.be.false;
       expect(utils.isUndefined(true)).to.be.false;
       expect(utils.isUndefined('string')).to.be.false;
@@ -200,6 +211,7 @@ describe('agentia-utilities', function() {
       expect(utils.isUndefined(new Date())).to.be.false;
       expect(utils.isUndefined([])).to.be.false;
       expect(utils.isUndefined(0)).to.be.false;
+      expect(utils.isUndefined(/test/)).to.be.false;
     });
 
   });
@@ -210,7 +222,7 @@ describe('agentia-utilities', function() {
       expect(utils.isNull(null)).to.be.true;
     });
 
-    it('shoud return false for non-boolean args', function() {
+    it('shoud return false for non-null args', function() {
       expect(utils.isNull({})).to.be.false;
       expect(utils.isNull(true)).to.be.false;
       expect(utils.isNull('string')).to.be.false;
@@ -219,6 +231,31 @@ describe('agentia-utilities', function() {
       expect(utils.isNull([])).to.be.false;
       expect(utils.isNull(0)).to.be.false;
       expect(utils.isNull(undefined)).to.be.false;
+      expect(utils.isNull(/test/)).to.be.false;
+    });
+
+  });
+
+  describe('.isRegExp()', function() {
+
+    it('should have alias .isRegex()', function() {
+      expect(utils.isRegExp).to.deep.equal(utils.isRegex);
+    });
+
+    it('shoud return true for RegExp args', function() {
+      expect(utils.isRegExp(/test/)).to.be.true;
+    });
+
+    it('shoud return false for non-RegExp args', function() {
+      expect(utils.isRegExp(null)).to.be.false;
+      expect(utils.isRegExp({})).to.be.false;
+      expect(utils.isRegExp(true)).to.be.false;
+      expect(utils.isRegExp('string')).to.be.false;
+      expect(utils.isRegExp(function() {})).to.be.false;
+      expect(utils.isRegExp(new Date())).to.be.false;
+      expect(utils.isRegExp([])).to.be.false;
+      expect(utils.isRegExp(0)).to.be.false;
+      expect(utils.isRegExp(undefined)).to.be.false;
     });
 
   });
@@ -233,6 +270,7 @@ describe('agentia-utilities', function() {
       expect(utils.exists(new Date())).to.be.true;
       expect(utils.exists([])).to.be.true;
       expect(utils.exists(0)).to.be.true;
+      expect(utils.exists(/test/)).to.be.true;
     });
 
     it('shoud return false for null and undefined args', function() {
@@ -244,7 +282,7 @@ describe('agentia-utilities', function() {
 
   describe('.randomString()', function() {
 
-    it('shoud return a 20 char string, when length is not specified', function() {
+    it('shoud return a 20 char string, when length not specified', function() {
       expect(utils.randomString().length).to.equal(20);
     });
 
@@ -268,11 +306,11 @@ describe('agentia-utilities', function() {
 
   describe('.round()', function() {
 
-    it('shoud round to nearest integer, when decimals not specified', function () {
+    it('shoud round to nearest int, when decimals not specified', function () {
       expect(utils.round(1111.11111)).to.equal(1111);
     });
 
-    it('shoud round to the number of decimals, when decimals is positive', function () {
+    it('shoud round to number of decimals, when positive', function () {
       expect(utils.round(1111.11111, 1)).to.equal(1111.1);
       expect(utils.round(1111.11111, 2)).to.equal(1111.11);
       expect(utils.round(1111.11111, 3)).to.equal(1111.111);
@@ -297,7 +335,7 @@ describe('agentia-utilities', function() {
       obj = null;
     });
 
-    it('should create read/write property, when getter/setter specified', function() {
+    it('should create read/write prop, if getter/setter specified', function() {
       var getter = function() {
         return this._data;
       };
@@ -312,7 +350,7 @@ describe('agentia-utilities', function() {
       expect(obj.key).to.equal('value');
     });
 
-    it('should create read-only property, when only getter specified', function() {
+    it('should create read-only prop, when only getter specified', function() {
       obj._data = 0;
       var getter = function() {
         return this._data++;
@@ -328,7 +366,7 @@ describe('agentia-utilities', function() {
       }).to.throw;
     });
 
-    it('should create read-only property, when ony value is passed', function() {
+    it('should create read-only prop, when ony value is passed', function() {
       utils.defineProp(obj, 'key', 'value');
 
       expect(obj).to.have.property('key');
@@ -364,7 +402,7 @@ describe('agentia-utilities', function() {
     });
 
 
-    it('should return an empty array, when argument is not a function', function() {
+    it('should return an empty array, when arg not function', function() {
       expect(utils.getParamNames({})).to.be.empty;
       expect(utils.getParamNames(true)).to.be.empty;
       expect(utils.getParamNames('string')).to.be.empty;
@@ -414,7 +452,7 @@ describe('agentia-utilities', function() {
       expect(merged).to.deep.equal(defaults);
     });
 
-    it('should return empty object, when options and defaults are empty', function() {
+    it('should return empty obj, when options/defaults are empty', function() {
       var options = null;
       var defaults = null;
 
