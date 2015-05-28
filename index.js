@@ -42,6 +42,10 @@ function isNull(arg) {
   return (typeOf(arg) === 'null');
 }
 
+function isRegExp(arg) {
+  return (typeOf(arg) === 'regexp');
+}
+
 function exists(arg) {
   return !isUndefined(arg) && !isNull(arg);
 }
@@ -125,6 +129,8 @@ module.exports = {
   isBoolean: isBoolean,
   isUndefined: isUndefined,
   isNull: isNull,
+  isRegExp: isRegExp,
+  isRegex: isRegExp,
   exists: exists,
   randomString: randomString,
   round: round,
